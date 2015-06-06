@@ -105,3 +105,10 @@ USE_TZ = True
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+# email settings
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
+EMAIL_USE_TLS = True
