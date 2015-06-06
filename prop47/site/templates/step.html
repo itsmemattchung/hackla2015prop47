@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="text-center">
-	<h3>You are on step {{step}}</h3>
-	{{form}}
+    <div class="row">
+        <h3>You are on step {{step}}</h3>
+        {{form}}
+    </div>
+    <div class="row">
+        <a href="{% url 'legal-step' 2 %}" class="btn">
+            NEXT
+        </a>
+    </div>
 </div>
 {% endblock %}
