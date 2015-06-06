@@ -24,6 +24,9 @@ SECRET_KEY = 't$h)-i&d2#g+)c5ow0##9ej(f-b_v0^w42%-^h=#x471^7iyh*'
 
 ALLOWED_HOSTS = []
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
@@ -97,4 +100,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'

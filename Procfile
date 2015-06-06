@@ -1,1 +1,1 @@
-web: ./manage.py runserver
+web: gunicorn prop47.wsgi --log-file -

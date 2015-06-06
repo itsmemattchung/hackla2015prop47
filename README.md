@@ -3,5 +3,5 @@ webapp to assist people get expunged
 
 ```
 pip install -r requirements.txt
-honcho start
+honcho start -f Procfile.dev
 ```
