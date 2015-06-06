@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'jousterest/css/vendor/bootstrap.min.css' %}">
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block modals %}
+    {% endblock %}
+    </div>
+    <script type="text/javascript" src="{% static 'jousterest/js/vendor/jquery-2.1.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jousterest/js/vendor/bootstrap.min.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>
