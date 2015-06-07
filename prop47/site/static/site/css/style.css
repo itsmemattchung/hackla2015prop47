@@ -36,6 +36,7 @@
 
 .disclaimer{
 	margin-left: 10px;
+    margin-top: 40px;
 }
 .half-width{
 	display: inline;
@@ -86,4 +87,28 @@
 
 #courthouses-heading{
     text-align: left;
+}
+
+#live-scan-locations p{
+    margin-left: 5px;
+}
+
+#live-scan-locations h4{
+    font-size: 16px;
+}
+
+#live-scan-heading{
+    text-align: left;
+}
+
+
+.live-scan-table{
+    width: 100%;
+    text-align: left;
+}
+.live-scan-table td{
+    padding: 5px;
+}
+.live-scan-table a{
+    font-weight: bold;
 }
