@@ -20,6 +20,7 @@ import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^about/', TemplateView.as_view(template_name="about.html")),
     url(r'^faq/', TemplateView.as_view(template_name="faq.html")),
     url(r'^legal/', TemplateView.as_view(template_name="legal.html")),
     url(r'^step/(?P<step>[\w-]+)$', views.get_step_view, name="legal-step"),
