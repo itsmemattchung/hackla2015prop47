@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+    <div class="row">
+        <div class="reminder">
+            <h4>Send me a reminder</h4>
+            <form>
+                <input type="text" placeholder="name" value="name">
+                <input type="text" placeholder="email" value="email">
+                <input type="submit" value="send">
+            </form>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            Live Sign Centers Near You
+            <ul class="list-unstyled" id="live-scan-locations">
+            </ul>
+        </div>
+        <div class="col-md-6">
+            Courthouses near you
+            <ul class="list-unstyled" id="courthouses-locations">
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <a href="#">Print Results</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/template" id="live-scan-template">
+<li>
+<div>
+    <h4><a href="<%-website%>"><%-name%></a></h4>
+    <p><%-address%></p>
+    <p><%-phone_number%></p>
+    <p>view in <a href="<%-url%>">google maps<a/></p>
+</div>
+</li>
+</script>
+
+<script type="text/template" id="courthouse-template">
+<li>
+<div>
+    <h4><a href="<%-website%>"><%-name%></a></h4>
+    <p><%-address%></p>
+    <p><%-phone_number%></p>
+    <p>view in <a href="<%-url%>">google maps<a/></p>
+</div>
+</li>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var live_scan_template = _.template($("#live-scan-template").html());
+        var courhouse_template = _.template($("#courthouse-template").html());
+        $.get("/locations/courthouses/?zip_code=90012")
+         .done(function(response){
+                _.each(response.courthouses, function(courthouse){
+                    $("#courthouses-locations").append(courhouse_template(courthouse));
+                });
+            })
+         .error(function(){
+             $("#courthouses-locations").before($('<p/>').text("There was an error retrieving courthouse information.  Please refresh"));
+         });
+
+        $.get("/locations/livescans/?zip_code=90012")
+         .done(function(response){
+                _.each(response.live_scans, function(live_scan){
+                    $("#live-scan-locations").append(live_scan_template(live_scan));
+                });
+            })
+         .error(function(){
+             $("#live-scan-locations").before($('<p/>').text("There was an error retrieving live scan information.  Please refresh"))
+         });
+    })
+</script>
+{% endblock %}
