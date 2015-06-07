@@ -4,9 +4,9 @@
 {% if step == '1' %}
   <div class="text-center">
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-12 col-md-12 col-sm-12">
           <h3>Do you have conviction for one of the following</h3>
-          <ul class="text-left list-unstyled" >
+          <ul class="text-left list-unstyled text-center">
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><span> Simple drug posession</span></li>
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Petty theft, including commenercial burglary $950 or less</li>
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Shoplifting $950 or less</li>
@@ -14,9 +14,25 @@
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Receipt of stolen property $950 or less</li>
           </ul>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <h3>Do you have conviction for one of the following</h3>
-          <ul class="text-left list-unstyled" >
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <span class="text-left"><a href="/resources/">No</a></span>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <span class="text-right"><a href="/step/2">Yes</a></span>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endif %}
+{% if step == '2' %}
+  <div class="text-center">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h3>You <strong>DO NOT</strong> have conviction of a <strong>violent</strong> crime</h3>
+          <ul class="text-left list-unstyled text-center" >
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Prior conviction for rape, child molestation or other violent crimes</li>
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Sex offender registrant</li>
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Identity theft</li>
@@ -25,13 +41,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 text-right">
-          <a href="/step/2">Next</a>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <span class="text-left"><a href="/resources/">No</a></span>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <span class="text-right"><a href="/step/3">Yes</a></span>
+          </div>
         </div>
       </div>
   </div>
+
 {% endif %}
-{% if step == '2' %}
+{% if step == '3' %}
   <div class="jumbotron">
     <h1>Search</h1>
     <p>We will locate court houses and live scan centers around you</p>
