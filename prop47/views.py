@@ -18,6 +18,11 @@ from .forms import FinalFormSubmissionForm
 
 def get_step_view(request, step):
     form = ResourcesSearchForm(request.GET or None)
+    if int(step) == 3 and request.method == "POST":
+        form = ResourcesSearchForm(request.POST)
+        if form.is_valid():
+            zip_code = form.cleaned_data['zip_code']
+            return HttpResponseRedirect(reverse("location-services", kwargs={"zip_code": zip_code}))
     return render(
         request,
         template_name="step.html",

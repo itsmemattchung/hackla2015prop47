@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load site_tags %}
 <h2>Resources</h2>
 <h3>Organizations which help with expungements</h3>
 <ul class="list-unstyled">
@@ -11,8 +12,8 @@
 </ul>
 <h3>Search for criminal defence attorneys by zip code</h3>
 <form method="GET">
-  {{ form.as_p }}
-  <input type="submit" value="Search">
+  {{form.zip_code|add_css:"half-width"}}
+  <input type="submit" class="btn btn-primary" value="Search">
 </form>
 {% for result in search_results.results %}
 <div class="media">
