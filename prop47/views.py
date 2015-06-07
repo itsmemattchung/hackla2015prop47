@@ -4,20 +4,15 @@ import requests
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
 
-from .forms import PriorCrimesForm
-from .forms import Prop47CrimesForm
 from .forms import ResourcesSearchForm
 
 
 def get_step_view(request, step):
-    if int(step) == 1:
-        pform = Prop47CrimesForm()
-    else:
-        pform = PriorCrimesForm()
+    form = ResourcesSearchForm(request.GET or None)
     return render(
         request,
         template_name="step.html",
-        context={"step": step, "form": pform},
+        context={"step": step, "form": form}
     )
 
 
