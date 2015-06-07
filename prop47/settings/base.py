@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't$h)-i&d2#g+)c5ow0##9ej(f-b_v0^w42%-^h=#x471^7iyh*'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    't$h)-i&d2#g+)c5ow0##9ej(f-b_v0^w42%-^h=#x471^7iyh*'
+)
 
 ALLOWED_HOSTS = []
 
@@ -102,3 +105,10 @@ USE_TZ = True
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+# email settings
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
+EMAIL_USE_TLS = True

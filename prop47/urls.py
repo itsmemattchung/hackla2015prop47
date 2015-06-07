@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^faq/', TemplateView.as_view(template_name="faq.html")),
     url(r'^legal/', TemplateView.as_view(template_name="legal.html")),
     url(r'^step/(?P<step>[\w-]+)$', views.get_step_view, name="legal-step"),
+    url(r'^resources/', views.ResourcesSearchView.as_view()),
     url(r'^resources/$', TemplateView.as_view(template_name="resources.html")),
     url(r'^step3/', TemplateView.as_view(template_name="enterzip.html")),
     url(r'^locations/$', TemplateView.as_view(template_name="location_services.html")),

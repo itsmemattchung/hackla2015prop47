@@ -9,4 +9,35 @@
 <li>Peperdine Legal Aid Clinic http://urm.pub30.convio.net/services/clinics/pepperdine-university-legal.html</li>
 <li>Neighborhood Legal Services Los Angeles County	http://www.nlsla.org/</li>
 </ul>
+<h4>Search for criminal defence attorneys by zip code</h4>
+<form method="GET">
+  {{ form.as_p }}
+  <input type="submit" value="Search">
+</form>
+{% for result in search_results.results %}
+<div class="media">
+  <div class="media-left">
+    <p><a href="{{ result.website }}"><img src="{{ result.image_url_secure }}" alt="{{ result.name }}" /></a></p>
+    <p class="text-center">AVVO rating: <strong>{{ result.avvo_rating }}</strong></p>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ result.name }}</h4>
+    {% if result.ad_details.tagline  %}
+    <p>{{ result.ad_details.tagline }}</p>
+    {% endif %}
+    <dl>
+      <dd><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ result.address }}</dd>
+      <dd><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> {{ result.phone }}</dd>
+      <dd><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <a href="{{ result.website }}">{{ result.website }}</a></dd>
+    </dl>
+    <p><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Client rating: <strong>{{ result.client_rating|floatformat:"1" }}</strong><br />
+    <a href="{{ result.client_reviews_url }}">{{ result.client_rating_count }} review{{ result.client_rating_count|pluralize }}</a></p>
+    <ul class="list-unstyled">
+    {% for specialty in result.specialties %}
+       <li>{{ specialty.percent }}% - {{ specialty.name }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

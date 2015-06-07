@@ -6,10 +6,10 @@ VAGRANTFILE_API_VERSION = "2"
 
 $script = <<SCRIPT
 sudo apt-get update
-sudo apt-get install libpq-dev python-dev python-pip -y
+sudo apt-get install libpq-dev python-dev python-setuptools supervisor -y
+sudo easy_install -U pip
 cd /vagrant && sudo pip install -r requirements.txt
-sudo apt-get install supervisor -y
-cd /vagrant && sudo honcho export -f Procfile.dev supervisord /etc/supervisor/conf.d/
+cd /vagrant && sudo cp vagrant.conf /etc/supervisor/conf.d/vagrant.conf
 sudo mkdir -p /var/log/vagrant && sudo chown -R vagrant:vagrant /var/log/vagrant
 sudo service supervisor restart
 SCRIPT

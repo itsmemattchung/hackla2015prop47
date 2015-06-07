@@ -1,8 +1,12 @@
+import os
+import requests
 from django.conf import settings
+
 from django.http import JsonResponse
 from django.shortcuts import render
 
 from googleplaces import GooglePlaces
+from .forms import ResourcesSearchForm
 
 
 def get_step_view(request, step):
