@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Resources</h2>
-<p>Organizations which help with expungements</p>
+<h3>Organizations which help with expungements</h3>
 <ul class="list-unstyled">
-<li>Legal Aid Foundation of Los Angeles: http://lafla.org/</li>
-<li>Friends Outside	http://www.friendsoutsidela.org/</li>
-<li>A New Way of Life	http://www.anewwayoflife.org/</li>
-<li>Peperdine Legal Aid Clinic http://urm.pub30.convio.net/services/clinics/pepperdine-university-legal.html</li>
-<li>Neighborhood Legal Services Los Angeles County	http://www.nlsla.org/</li>
+  <li><a href="http://lafla.org">Legal Aid Foundation of Los Angeles</a></li>
+  <li><a href="http://www.friendsoutsidela.org/">Friends Outside</a></li>
+  <li><a href="http://www.anewwayoflife.org/">A New Way of Life</a></li>
+  <li><a href="http://urm.pub30.convio.net/services/clinics/pepperdine-university-legal.html">Peperdine Legal Aid Clinic</a></li>
+  <li><a href="http://www.nlsla.org/">Neighborhood Legal Services Los Angeles County</a></li>
 </ul>
-<h4>Search for criminal defence attorneys by zip code</h4>
+<h3>Search for criminal defence attorneys by zip code</h3>
 <form method="GET">
   {{ form.as_p }}
   <input type="submit" value="Search">
