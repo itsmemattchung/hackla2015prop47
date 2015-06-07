@@ -25,12 +25,14 @@ urlpatterns = [
     url(r'^step/(?P<step>[\w-]+)$', views.get_step_view, name="legal-step"),
     url(r'^resources/', views.ResourcesSearchView.as_view()),
     url(r'^resources/$', TemplateView.as_view(template_name="resources.html")),
-    url(r'^step3/', TemplateView.as_view(template_name="enterzip.html")),
-    url(r'^locations/$', TemplateView.as_view(template_name="location_services.html")),
+    url(r'^step3/', views.enter_zip_code),
+    url(r'^locations/(?P<zip_code>[\w-]+)$', views.locations_view, name="location-services"),
     url(r'^locations/livescans/$', views.get_live_scan_results, name="live-scan-resources"),
     url(r'^locations/courthouses/$', views.get_court_results, name="court-resources"),
-
+    url(r'^email_reminder/$', views.create_email_reminder, name="email-reminder"),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
-
-
+    url(r'^complete/1/$', TemplateView.as_view(template_name="step_1_complete.html"), name="step-1-complete"),
+    # checklists
+    url(r'^checklist/$', views.get_checklist, name="checklist"),
+    url(r'^checklist/final$', views.final_checklist, name="final-checklist")
 ]

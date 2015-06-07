@@ -1,27 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load site_tags %}
 <div class="text-center">
     <div class="row">
-        <div class="reminder">
-            <h4>Send me a reminder</h4>
-            <form>
-                <input type="text" placeholder="name" value="name">
-                <input type="text" placeholder="email" value="email">
-                <input type="submit" value="send">
-            </form>
-        </div>
+        <p>You will need to get your records from one of the below court houses and also visit a Live Scan center for finger prints.</p>
     </div>
     <div class="row">
-
-        <div class="col-md-6">
-            Live Sign Centers Near You
-            <ul class="list-unstyled" id="live-scan-locations">
-            </ul>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             Courthouses near you
             <ul class="list-unstyled" id="courthouses-locations">
             </ul>
+        </div>
+        <div class="col-md-4">
+            <div class="reminder">
+                <h4>Send me a reminder</h4>
+                <form class="form" action="{% url 'email-reminder' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <label for="{{form.name.id_for_label}}">name: </label>
+                        <div class="col-sm-9">
+                        {{form.name|add_css:"form-control"}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <label for="{{form.email.id_for_label}}">email: </label>
+                        <div class="col-sm-9">
+                        {{form.email|add_css:"form-control"}}
+                        </div>
+                    </div>
+                    <input type="submit" value="send">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            Live Sign Centers 
+            <table class="table-striped">
+                <tbody id="live-scan-locations">
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row">
@@ -33,14 +51,12 @@
 
 {% block js %}
 <script type="text/template" id="live-scan-template">
-<li>
-<div>
-    <h4><a href="<%-website%>"><%-name%></a></h4>
-    <p><%-address%></p>
-    <p><%-phone_number%></p>
-    <p>view in <a href="<%-url%>">google maps<a/></p>
-</div>
-</li>
+<tr>
+    <td><a href="<%-website%>"><%-name%></a></td>
+    <td><%-address%></td>
+    <td><%-phone_number%></td>
+    <td>view in <a href="<%-url%>">google maps<a/></td>
+</tr>
 </script>
 
 <script type="text/template" id="courthouse-template">
@@ -58,7 +74,7 @@
     $(document).ready(function(){
         var live_scan_template = _.template($("#live-scan-template").html());
         var courhouse_template = _.template($("#courthouse-template").html());
-        $.get("/locations/courthouses/?zip_code=90012")
+        $.get("/locations/courthouses/?zip_code=={{zip_code}}&count=3")
          .done(function(response){
                 _.each(response.courthouses, function(courthouse){
                     $("#courthouses-locations").append(courhouse_template(courthouse));
@@ -68,7 +84,7 @@
              $("#courthouses-locations").before($('<p/>').text("There was an error retrieving courthouse information.  Please refresh"));
          });
 
-        $.get("/locations/livescans/?zip_code=90012")
+        $.get("/locations/livescans/?zip_code={{zip_code}}")
          .done(function(response){
                 _.each(response.live_scans, function(live_scan){
                     $("#live-scan-locations").append(live_scan_template(live_scan));

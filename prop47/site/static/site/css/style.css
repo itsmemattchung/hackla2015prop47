@@ -1,0 +1,28 @@
+.reminder{
+    background-color: #f9f9f9;
+}
+.checklist-information{
+	margin-top: 30px;
+	margin-left: 15px;
+	font-size: 20px;
+}
+
+.document-list{
+	margin-top: 25px;
+}
+.document-list-item{
+	border: 1px solid #DDD;
+	color: #777;
+	font-size: 20px;
+	padding: 10px;
+	text-align: left;
+	border-bottom: none;
+}
+
+.document-list-item:last-child{
+	border-bottom: 1px solid #DDD;
+}
+
+.document-list-item .glyphicon{
+	float: right;
+}

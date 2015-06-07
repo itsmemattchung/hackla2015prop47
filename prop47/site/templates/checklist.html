@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Checklist</h2>
+<p class="checklist-information">You will need the following documents:</p>
+<div class="row">
+	<div class="text-center">
+		<div class="col-md-offset-4 col-md-4">
+			<ul class="list-unstyled document-list">
+				<li class="document-list-item">
+					Criminal Records
+					<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				</li>
+				<li class="document-list-item">
+					Live Scan Document
+					<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				</li>
+				<li class="document-list-item">
+					Reclassification Form
+					<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				</li>
+			</ul>
+		</div>
+</div>
+<div class="row">
+	<div class="text-center">
+		<div class="col-md-offset-4 col-md-4">
+			<form class="form" action="." method="POST">
+				{% csrf_token %}
+				{{form.zip_code}}
+				<input type="submit" class="btn btn-primary" value="finalize">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

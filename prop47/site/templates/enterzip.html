@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="text-center">
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="." method="POST">
+    	{% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-3">Enter Zip Code: </label>
         <div class="col-sm-9">
-            <input type="text" value="zip">
+            {{form.zip_code}}
         </div>
+        <input type="submit" value="find resources">
       </div>
     </form>
 </div>
