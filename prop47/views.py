@@ -13,6 +13,7 @@ from googleplaces import GooglePlaces
 from .forms import ResourcesSearchForm
 from .forms import ZipcodeSubmitForm
 from .forms import EmailReminderForm
+from .forms import StayUpdatedForm
 
 
 def get_step_view(request, step):
@@ -22,6 +23,20 @@ def get_step_view(request, step):
         template_name="step.html",
         context={"step": step, "form": form}
     )
+
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        form = StayUpdatedForm(self.request.GET or None)
+        context['form'] = form
+        if form.is_valid():
+            '''
+            Insert email into database
+            '''
+            pass
+        return context
 
 
 class ResourcesSearchView(TemplateView):

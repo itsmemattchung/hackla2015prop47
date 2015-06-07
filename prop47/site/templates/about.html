@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>About Us</h1>
   <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-8">
+      <h1>About Us</h1>
+      <p>Expunge.LA was created at the Hack For LA 2015 Event hosted at the LA DWP building in conjunction with the National Day of Civic Hacking</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
+      <h1>Stay updated</h1>
+      <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
   <div class="row">
