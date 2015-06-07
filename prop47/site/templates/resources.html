@@ -9,4 +9,22 @@
 <li>Peperdine Legal Aid Clinic http://urm.pub30.convio.net/services/clinics/pepperdine-university-legal.html</li>
 <li>Neighborhood Legal Services Los Angeles County	http://www.nlsla.org/</li>
 </ul>
+<h4>Search for criminal defence attorneys by zip code</h4>
+<form method="GET">
+  {{ form.as_p }}
+  <input type="submit" value="Search">
+</form>
+{% for result in search_results.results %}
+<div class="media">
+  <div class="media-left">
+    <a href="{{ result.website }}"><img src="{{ result.image_url_secure }}" alt="{{ result.name }}" /></a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ result.name }}</h4>
+    <p>{{ result.phone }}</p>
+    <p>{{ result.address }}</p>
+    <p><a href="{{ result.website }}">{{ result.website }}</a></p>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

@@ -1,4 +1,5 @@
 from django import forms
+from localflavor.us.forms import USZipCodeField
 
 
 PROP_47_CRIMES = (
@@ -33,3 +34,6 @@ class Prop47CrimesForm(forms.Form):
 class FaxFormsForm(forms.Form):
     pass
 
+
+class ResourcesSearchForm(forms.Form):
+    zip_code = USZipCodeField()
