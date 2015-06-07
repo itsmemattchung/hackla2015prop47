@@ -112,3 +112,7 @@
 .live-scan-table a{
     font-weight: bold;
 }
+.wheel{
+    height: 100%;
+    width: 100%;
+}

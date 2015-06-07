@@ -1,20 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>FAQ</h2>
+<div class="row">
+	<div class="col-md-10">
 <ul class="list-unstyled">
+
 <li>
 	<h4>Why is this site important?</h4>
-This site is important because the state-wide legal aid referral site, CA Law Help http://lawhelpca.org/issues/expungement-and-record-clearing/criminal-record-clearing, does not provide resources specific to Los Angeles County. Therefore, this site aims to fill that void.
+This site is important because the state-wide legal aid referral site, CA Law Help, does not provide resources specific to Los Angeles County. Therefore, this site aims to fill that void.
+</li>
+
+<li>
+<h4>Is there an urgency to file for reclassification?</h4>
+Yes, under Prop 47 you must file for reclassification before November 5, 2017. If you miss that deadline, you have to show “good cause” to the court to be allowed to file late.
+</li>
+
+<li>
+<h4>What costs are associated with this process?</h4>
+In Los Angeles County, there is no fee to file for reclassification but there are related fees the applicant should expect: pulling their record of arrest &amp prosecution (rap sheet); live-scan services (which varies); copy fees; and mailing fees (postage and proof of mailing).
+</li>
+
+<li>
+<h4>Does this web-site keep any of my information?</h4>
+This web-site does not intentionally collect personally identifiable information. At most, we will collect common information such as those available using Google Analytics.
 </li>
 
 <li>
 <h4>What are the benefits of Prop 47?</h4>
-For individuals who visit this site, they will be able to initiate the reclassification process which makes eligible felony convictions misdemeanors. When a felony becomes a misdemeanor, an individual has a greater likelihood of staying out of jail and re-integrating into his/her community. Additionally, Prop 47 shifts monies that would have been spent on incarceration to health services & education.
-</li>
-
-<li>
-<h4>Why expunge.la?</h4>
-Expunge.la guides individuals through the reclassification process as a first step in expungement of criminal records. Additionally, expunge.la provides resources for invididuals who may want to seek expungement whether or not they are eligible for Prop 47.
+For individuals who visit this site, they will be able to initiate the reclassification process which makes eligible felony convictions misdemeanors. When a felony becomes a misdemeanor, an individual has a greater likelihood of staying out of jail and re-integrating into his/her community.<br>
+Additionally, Prop 47 shifts monies that would have been spent on incarceration to health services &amp education.
 </li>
 
 <li>
@@ -23,21 +37,15 @@ Through this web site deals with very specific legal issues, it deals with them 
 </li>
 
 <li>
-<h4>Who is responsible for this site?</h4>
-This site came together during the National Day of Civic Hacking 2015. 
+<h4>This site allows me to look for attorneys and other resources: who vets that?</h4>
+The data this site pulls is from two sources, the Los Angeles County Court system (via scraping of content) and Avvo (via their API). The court system is publicly funded while Avvo is a private entity who graciously is allowing us to use their API. The Hack Prop 47 team is not responsible for the accuracy of the data or quality of services received at identified locations/providers.
 </li>
-<li>
-What tools and or platforms were used to develop this site?
-The team used the following tools:
-<ul class="list-unstyled">
-<li>Slack</li>
-<li>Heroku</li>
-<li>Namecheap</li>
-<li>VirtualEnv</li>
 
 </ul>
-</li>
-</ul>
+</div>
+
+
+</div>
 <hr class="featurette-divider">
 <div class="row">
   <img src="/static/site/images/prop47workflow.png" class="img-responsive" style="width: 100%">
