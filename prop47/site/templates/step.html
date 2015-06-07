@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load site_tags %}
 {% if step == '1' %}
   <div class="text-center">
       <div class="row">
@@ -36,8 +37,8 @@
     <p>We will locate court houses and live scan centers around you</p>
   </div>
   <form method="GET">
-    {{ form.as_p }}
-    <input type="submit" value="Search">
+    {{ form.zip_code|add_css:"half-width"}}
+    <input type="submit" class="btn btn-primary" value="Search">
   </form>
 {% endif %}
 {% endblock %}

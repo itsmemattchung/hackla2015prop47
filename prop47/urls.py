@@ -35,5 +35,5 @@ urlpatterns = [
     url(r'^complete/1/$', TemplateView.as_view(template_name="step_1_complete.html"), name="step-1-complete"),
     # checklists
     url(r'^checklist/$', views.get_checklist, name="checklist"),
-    url(r'^checklist/final$', views.final_checklist, name="final-checklist")
+    url(r'^checklist/final/(?P<zip_code>[\w-]+)$', views.final_checklist, name="final-checklist")
 ]

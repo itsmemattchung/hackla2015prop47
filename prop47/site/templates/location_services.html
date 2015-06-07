@@ -3,32 +3,29 @@
 {% load site_tags %}
 <div class="text-center">
     <div class="row">
-        <p>You will need to get your records from one of the below court houses and also visit a Live Scan center for finger prints.</p>
+        <p class="location-info">
+            You will need to get your records from one of the below court houses and also visit a Live Scan center for finger prints.
+        </p>
     </div>
+    <p id="courthouses-heading">Courthouses near you</p>
     <div class="row">
-        <div class="col-md-8">
-            Courthouses near you
+        <div class="col-md-9">
+            
             <ul class="list-unstyled" id="courthouses-locations">
             </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="reminder">
-                <h4>Send me a reminder</h4>
+                <h4>Send me an email reminder</h4>
                 <form class="form" action="{% url 'email-reminder' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                    <label for="{{form.name.id_for_label}}">name: </label>
-                        <div class="col-sm-9">
                         {{form.name|add_css:"form-control"}}
-                        </div>
                     </div>
                     <div class="form-group">
-                    <label for="{{form.email.id_for_label}}">email: </label>
-                        <div class="col-sm-9">
                         {{form.email|add_css:"form-control"}}
-                        </div>
                     </div>
-                    <input type="submit" value="send">
+                    <input type="submit" value="send" class="btn btn-primary">
                 </form>
             </div>
         </div>
@@ -43,6 +40,8 @@
         </div>
     </div>
     <div class="row">
+        <h4>Disclaimer</h4>
+        <p class="disclaimer">None of the content or output of this web site should be construed as legal advice. Every individual's circumstances are unique so we strongly encourage individuals with uncertainty or questions to seek legal counsel.</p>
         <a href="#">Print Results</a>
     </div>
 </div>
@@ -53,7 +52,7 @@
 <script type="text/template" id="live-scan-template">
 <tr>
     <td><a href="<%-website%>"><%-name%></a></td>
-    <td><%-address%></td>
+    <td><%-address1%><br><%-address2%></td>
     <td><%-phone_number%></td>
     <td>view in <a href="<%-url%>">google maps<a/></td>
 </tr>
@@ -61,23 +60,32 @@
 
 <script type="text/template" id="courthouse-template">
 <li>
-<div>
-    <h4><a href="<%-website%>"><%-name%></a></h4>
-    <p><%-address%></p>
-    <p><%-phone_number%></p>
-    <p>view in <a href="<%-url%>">google maps<a/></p>
-</div>
+<h4><a href="<%-website%>"><%-name%></a></h4>
+<p><%-address1%></p>
+<p><%-address2%></p>
+<p><%-phone_number%></p>
+<p>view in <a href="<%-url%>">google maps<a/></p>
 </li>
 </script>
 
 <script type="text/javascript">
     $(document).ready(function(){
+        function split_address(data_blob){
+            var line_1 = data_blob.address.split(',')[0];
+            var line_2 = data_blob.address.replace(line_1+",", "");
+            $.extend(data_blob, {'address1':line_1, 'address2':line_2});
+            console.log(data_blob);
+            return data_blob;
+        }
+
+
         var live_scan_template = _.template($("#live-scan-template").html());
         var courhouse_template = _.template($("#courthouse-template").html());
         $.get("/locations/courthouses/?zip_code=={{zip_code}}&count=3")
          .done(function(response){
                 _.each(response.courthouses, function(courthouse){
-                    $("#courthouses-locations").append(courhouse_template(courthouse));
+                    var format_courthouses = split_address(courthouse);
+                    $("#courthouses-locations").append(courhouse_template(format_courthouses));
                 });
             })
          .error(function(){
@@ -87,7 +95,8 @@
         $.get("/locations/livescans/?zip_code={{zip_code}}")
          .done(function(response){
                 _.each(response.live_scans, function(live_scan){
-                    $("#live-scan-locations").append(live_scan_template(live_scan));
+                    var format_live_scan = split_address(live_scan);
+                    $("#live-scan-locations").append(live_scan_template(format_live_scan));
                 });
             })
          .error(function(){

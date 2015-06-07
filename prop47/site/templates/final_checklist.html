@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load site_tags %}
 <h2>Finalize</h2>
 <p class="checklist-information">Upload and send documents:</p>
 <div class="row">
@@ -8,15 +9,25 @@
             <ul class="list-unstyled document-list">
                 <li class="document-list-item">
                     Criminal Records
-                    <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+                    <div class="fileUpload btn">
+                        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                        <input type="file" class="upload" />
+                        {{form.criminal_records|add_css:"upload"}}
+                    </div>
                 </li>
                 <li class="document-list-item">
                     Live Scan Document
-                    <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+                    <div class="fileUpload btn">
+                        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                        {{form.live_scan_docs|add_css:"upload"}}
+                    </div>
                 </li>
                 <li class="document-list-item">
                     Reclassification Form
-                    <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+                    <div class="fileUpload btn">
+                        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                        {{form.reclassification|add_css:"upload"}}
+                    </div>
                 </li>
             </ul>
         </div>
@@ -29,30 +40,31 @@
                 <div class="form-group">
                 <label class=" checklist control-label col-sm-3">name:</label>
                 <div class="col-sm-9">
-                  <input type="text" value="name">
+                	{{form.name|add_css:"form-control"}}
                 </div>
                 </div>
                 <div class="form-group">
                     <label class="checklist control-label col-sm-3">email:</label>
                     <div class="col-sm-9">
-                      <input type="text" value="email">
+                    	{{form.email|add_css:"form-control"}}
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="checklist control-label col-sm-3">courthouse:</label>
                     <div class="col-sm-9">
-                      <select>
-                          <option></option>
-                          <option></option>
-                          <option></option>
-                          <option></option>
-                          <option></option>
-                      </select>
+                      {{form.choices|add_css:"form-control"}}
                     </div>
                 </div>
-              <input type="submit">
+              <input type="submit" class="btn btn-primary" value="Send Paperwork">
             </form>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+    });
+</script>
 {% endblock %}

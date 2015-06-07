@@ -6,13 +6,13 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
 
 from googleplaces import GooglePlaces
 from .forms import ResourcesSearchForm
 from .forms import ZipcodeSubmitForm
 from .forms import EmailReminderForm
+from .forms import FinalFormSubmissionForm
 
 
 def get_step_view(request, step):
@@ -75,51 +75,63 @@ def locations_view(request, zip_code):
 
 
 def get_court_results(request):
-    google_places = GooglePlaces(settings.GOOGLE_MAPS_API_KEY)
-    results_count = int(request.GET.get('count', 5))
-    place_results = google_places.nearby_search(
-        location=request.GET.get('zip_code'),
-        keyword="Courthouse",
-        radius=20000,
-        types=[]
-        )
-    map(lambda x: x.get_details(), place_results.places[:results_count])
-    json_results = [{
-        "name": tpr.name,
-        "address": tpr.formatted_address,
-        "website": tpr.website,
-        "phone_number": tpr.local_phone_number,
-        "url": tpr.url
-        }
-        for tpr in place_results.places[:results_count]]
-    return JsonResponse({"courthouses": json_results})
+    courthouse_results = _get_google_map_search_results(
+        term="courthouse",
+        zip_code=request.GET.get('zip_code'),
+        count=int(request.GET.get('count', 5)))
+    return JsonResponse({"courthouses": courthouse_results})
 
 
 def get_live_scan_results(request):
-    google_places = GooglePlaces(settings.GOOGLE_MAPS_API_KEY)
-    results_count = request.GET.get('count', 5)
-    place_results = google_places.nearby_search(
-        location=request.GET.get('zip_code'),
-        keyword="Live Scan",
-        radius=20000,
-        types=[]
-        )
-    map(lambda x: x.get_details(), place_results.places[:results_count])
-    json_results = [{
-        "name": tpr.name,
-        "address": tpr.formatted_address,
-        "website": tpr.website,
-        "phone_number": tpr.local_phone_number,
-        "url": tpr.url
-        }
-        for tpr in place_results.places[:results_count]]
-    return JsonResponse({"live_scans": json_results})
+    livescan_results = _get_google_map_search_results(
+        term="Live Scan",
+        zip_code=request.GET.get('zip_code'),
+        count=int(request.GET.get('count', 5)))
+    return JsonResponse({"live_scans": livescan_results})
 
 
 def get_checklist(request):
     form = ZipcodeSubmitForm()
+    if request.method == "POST":
+        form = ZipcodeSubmitForm(request.POST)
+        if form.is_valid():
+            zip_code = form.cleaned_data['zip_code']
+            return HttpResponseRedirect(reverse("final-checklist", kwargs={"zip_code": zip_code}))
     return render(request, "checklist.html", {"form": form})
 
 
-def final_checklist(request):
-    return render(request, "final_checklist.html", {})
+def final_checklist(request, zip_code):
+    courthouse_results = _get_google_map_search_results("courthouse", zip_code)
+    form = FinalFormSubmissionForm(choices=courthouse_results)
+    if request.method == "POST":
+        return HttpResponseRedirect(reverse("step-1-complete"))
+    return render(
+        request,
+        "final_checklist.html",
+        {
+            "form": form,
+            "zip_code": zip_code
+            }
+        )
+
+
+def _get_google_map_search_results(term, zip_code, count=5, radius=20000):
+    google_places = GooglePlaces(settings.GOOGLE_MAPS_API_KEY)
+    place_results = google_places.nearby_search(
+        location=zip_code,
+        keyword=term,
+        radius=20000,
+        types=[]
+        )
+    map(lambda x: x.get_details(), place_results.places[:count])
+    json_results = [{
+        "name": tpr.name,
+        "address": tpr.formatted_address,
+        "website": tpr.website,
+        "phone_number": tpr.local_phone_number,
+        "url": tpr.url,
+        "id": tpr.id,
+        "place_id": tpr.place_id
+        }
+        for tpr in place_results.places[:count]]
+    return json_results

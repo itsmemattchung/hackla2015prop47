@@ -1,5 +1,12 @@
 .reminder{
     background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.location-info{
+    margin-top: 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
 }
 .checklist-information{
 	margin-top: 30px;
@@ -19,10 +26,64 @@
 	border-bottom: none;
 }
 
+.glyph-question{
+	float: right;
+}
+
 .document-list-item:last-child{
 	border-bottom: 1px solid #DDD;
 }
 
-.document-list-item .glyphicon{
-	float: right;
+.disclaimer{
+	margin-left: 10px;
+}
+.half-width{
+	display: inline;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin:  0px 10px 0px 10px;
+    float: right;
+    font-size: 20px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+#courthouses-locations li{
+    float: left;
+    margin-right: 8px;
+    background-color: #f9f9f9;
+    padding: 8px;
+    text-align: left;
+}
+
+#courthouses-locations p{
+    margin-left: 5px;
+}
+
+#courthouses-locations h4{
+    font-size: 16px;
+}
+
+#courthouses-heading{
+    text-align: left;
 }
